@@ -28,7 +28,7 @@
     "rrweb-player": "^1.0.0-alpha.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
-    "web-see": "^1.1.0"
+    "web-see": "^1.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

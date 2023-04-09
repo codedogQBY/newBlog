@@ -19,7 +19,7 @@ async function setupApp() {
     dsn: '/api/monitor/monitorReport', // 上报的地址
     apikey: '管理后台', // 项目唯一的id
     silentRecordScreen: true, // 开启录屏
-    // useImgUpload: true,
+    repeatCodeError: true,
   })
 
   await setupRouter(app)

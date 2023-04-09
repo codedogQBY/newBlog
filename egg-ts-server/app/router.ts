@@ -57,4 +57,6 @@ export default (app: Application) => {
   router.post('/api/v1/system/tag/editTagById', verifyToken, controller.tag.editTagById);
   router.post('/api/v1/system/tag/list', verifyToken, controller.tag.list);
 
+  // chatGpt相关
+  router.post('/api/v1/common/chatgpt/answer',verifyToken, controller.common.getAnswer);
 };

@@ -139,13 +139,6 @@ const rules = {
       trigger: ['input', 'blur'],
     },
   ],
-  component: [
-    {
-      required: true,
-      message: '渲染组件不能为空',
-      trigger: ['input', 'blur'],
-    },
-  ],
 }
 const columns = [
   { type: 'selection', fixed: 'left' },

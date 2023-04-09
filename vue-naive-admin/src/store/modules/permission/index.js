@@ -37,7 +37,7 @@ function filterAsyncRoutes(routes = [], role) {
   return ret
 }
 
-const generator = (constantRouterComponents, routerMap, parent) => {
+const generator = (constantRouterComponents, keepAliveArr, routerMap, parent) => {
   return routerMap.map((item) => {
     const { component, meta, key, permission, type, serialNum } = item
     const { title, show, hideChildren, hiddenHeaderContent, icon } = meta
@@ -56,6 +56,7 @@ const generator = (constantRouterComponents, routerMap, parent) => {
         permission,
         type,
         actions: (item.children || []).filter((action) => action.type === 3),
+        keepAlive: keepAliveArr.includes(component),
       },
       // 是否设置了隐藏菜单
       hidden: show === false,
@@ -73,7 +74,7 @@ const generator = (constantRouterComponents, routerMap, parent) => {
     item.redirect && (currentRouter.redirect = item.redirect)
     // 是否有子菜单，并递归处理
     if (item.children && item.children.length > 0) {
-      currentRouter.children = generator(constantRouterComponents, item.children, currentRouter)
+      currentRouter.children = generator(constantRouterComponents, keepAliveArr, item.children, currentRouter)
     }
     return currentRouter
   })
@@ -127,17 +128,21 @@ export const usePermissionStore = defineStore('permission', {
       const constantRouterComponents = {
         Layout: markRaw(Layout),
       }
+      const keepAliveArr = []
       Object.keys(page).forEach((key) => {
         const file = page[key].default
         if (file.isPage) {
           constantRouterComponents[file.name] = () => import(key)
+        }
+        if (file.keepAlive) {
+          keepAliveArr.push(file.name)
         }
       })
       const userMenu = userStore.menu
       const nav = []
       // 后端数据, 根级树数组,  根级 PID
       listToTree(userMenu, nav, 0)
-      const routers = generator(constantRouterComponents, nav)
+      const routers = generator(constantRouterComponents, keepAliveArr, nav)
       this.accessRoutes = routers
       return this.accessRoutes
     },

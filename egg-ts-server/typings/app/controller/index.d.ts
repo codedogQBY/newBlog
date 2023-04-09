@@ -2,6 +2,7 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
+import ExportCommon from '../../../app/controller/common';
 import ExportFile from '../../../app/controller/file';
 import ExportHome from '../../../app/controller/home';
 import ExportMenu from '../../../app/controller/menu';
@@ -12,6 +13,7 @@ import ExportUser from '../../../app/controller/user';
 
 declare module 'egg' {
   interface IController {
+    common: ExportCommon;
     file: ExportFile;
     home: ExportHome;
     menu: ExportMenu;

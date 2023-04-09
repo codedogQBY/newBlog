@@ -101,7 +101,7 @@ import TheIcon from '@/components/icon/TheIcon.vue'
 import PreviewModal from '@/views/code/previewModal.vue'
 import { useMessage } from 'naive-ui'
 
-defineOptions({ name: 'Code', isPage: true })
+defineOptions({ name: 'Code', isPage: true, keepAlive: true })
 const message = useMessage()
 const formRef = ref('formRef')
 const model = ref({
